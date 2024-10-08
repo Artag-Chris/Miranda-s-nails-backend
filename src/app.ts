@@ -11,7 +11,7 @@ import { createServer } from 'http';
 
 
 function main() {
-
+ console.log("Starting Server...");
   const server = new Server({
     port: envs.PORT,
   });
