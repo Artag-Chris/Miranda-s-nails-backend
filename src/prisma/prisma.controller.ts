@@ -9,11 +9,47 @@ export class PrismaController {
     ) {}
     
     onCreateManicurist= async(req:Request, res:Response) =>{
+        //se desfragmentara el body
         const payload= req.body;
         const mensaje =await this.prismaService.onCreateManicuristReceived(payload);   
         res.status(200).send(mensaje);
     }
    
+    onGetManicurist= async(req:Request, res:Response) =>{
+        const payload= req.body;
+        const mensaje =await this.prismaService.onGetManicuristReceived(payload);   
+        res.status(200).send(mensaje);
+    }
+    onCreateInventary= async(req:Request, res:Response) =>{
+        const payload= req.body;
+        const mensaje =await this.prismaService.onCreateInventaryReceived(payload);   
+        res.status(200).send(mensaje);
+    }
+    onGetInventary= async(req:Request, res:Response) =>{
+        const payload= req.body;
+        const mensaje =await this.prismaService.onGetInventaryReceived(payload);   
+        res.status(200).send(mensaje);
+    }
+    onCreateClient= async(req:Request, res:Response) =>{
+        const payload= req.body;
+        const mensaje =await this.prismaService.onCreateClientReceived(payload);   
+        res.status(200).send(mensaje);
+    }
+    onGetClient= async(req:Request, res:Response) =>{
+        const payload= req.body;
+        const mensaje =await this.prismaService.onGetClientReceived(payload);   
+        res.status(200).send(mensaje);
+    }
+    onCreatehistory= async(req:Request, res:Response) =>{
+        const payload= req.body;
+        const mensaje =await this.prismaService.onCreatehistoryReceived(payload);   
+        res.status(200).send(mensaje);
+    }
+    onGethistory= async(req:Request, res:Response) =>{
+        const payload= req.body;
+        const mensaje =await this.prismaService.onGethistoryReceived(payload);   
+        res.status(200).send(mensaje);
+    }
 
 }
 

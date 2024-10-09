@@ -1,0 +1,113 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// schema.prisma
+
+model Manicurista {
+  id        BigInt @id @default(autoincrement())
+  nombre    String
+  telefono  String?
+  HistorialUnas HistorialUnas[]
+  Turno     Turno[]
+}
+
+model Cliente {
+  id        BigInt @id @default(autoincrement())
+  nombre    String
+  telefono  String?
+  email     String?
+  HistorialUnas HistorialUnas[]
+  Turno     Turno[]
+  Transaccion Transaccion[]
+}
+
+model Servicio {
+  id        BigInt @id @default(autoincrement())
+  nombre    String
+  HistorialUnas HistorialUnas[]
+  ServiciosRealizados ServiciosRealizados[]
+}
+
+model TipoServicio {
+  id        BigInt @id @default(autoincrement())
+  nombre    String
+  HistorialUnas HistorialUnas[]
+}
+
+model HistorialUnas {
+  id              BigInt @id @default(autoincrement())
+  cliente_id      BigInt
+  manicurista_id  BigInt
+  servicio_id     BigInt
+  tipo_servicio_id BigInt
+  fecha           DateTime
+  observaciones   String?
+  tiene_hongos    Boolean @default(false)
+
+  cliente         Cliente @relation(fields: [cliente_id], references: [id])
+  manicurista     Manicurista @relation(fields: [manicurista_id], references: [id])
+  servicio        Servicio @relation(fields: [servicio_id], references: [id])
+  tipo_servicio   TipoServicio @relation(fields: [tipo_servicio_id], references: [id])
+}
+
+model Turno {
+  id              BigInt @id @default(autoincrement())
+  cliente_id      BigInt
+  manicurista_id  BigInt
+  fecha           DateTime
+  hora            DateTime
+  estado          String @default("pendiente")
+
+  cliente         Cliente @relation(fields: [cliente_id], references: [id])
+  manicurista     Manicurista @relation(fields: [manicurista_id], references: [id])
+  ServiciosRealizados ServiciosRealizados[]
+}
+
+model Transaccion {
+  id              BigInt @id @default(autoincrement())
+  fecha           DateTime
+  tipo            String
+  monto           Float
+  descripcion     String?
+  cliente_id      BigInt?
+
+  cliente         Cliente? @relation(fields: [cliente_id], references: [id])
+}
+
+model ServiciosRealizados {
+  id              BigInt @id @default(autoincrement())
+  turno_id        BigInt
+  servicio_id     BigInt
+  precio          Float
+
+  turno           Turno @relation(fields: [turno_id], references: [id])
+  servicio        Servicio @relation(fields: [servicio_id], references: [id])
+}
+
+model Inventario {
+  id                    BigInt @id @default(autoincrement())
+  nombre_producto       String
+  cantidad              Int
+  costo_unitario        Float
+  precio_venta          Float
+  fecha_ultima_actualizacion DateTime @default(now())
+}
+
+model ReporteFinanciero {
+  id              BigInt @id @default(autoincrement())
+  nombre_reporte  String
+  fecha_generacion DateTime @default(now())
+  contenido       String?
+}

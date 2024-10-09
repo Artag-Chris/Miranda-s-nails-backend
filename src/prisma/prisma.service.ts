@@ -16,11 +16,45 @@ class PrismaService extends PrismaClient {
   
    ///se cambiara los metodos 
   async onCreateManicuristReceived(payload: any) {
-
+   //creara un nuevo manicurista en la db
    console.log(payload);
   
-  
-     
+    return 'Texto recibido';
+  }
+
+  async onGetManicuristReceived(payload: any) {
+    //obtiene todos los manicuristas de la db
+    console.log(payload);
+    return 'Texto recibido';
+  }
+  async onCreateInventaryReceived(payload: any) {
+    //creara un nuevo inventario en la db
+    console.log(payload);
+    return 'Texto recibido';
+  }
+  async onGetInventaryReceived(payload: any) {
+    //obtiene todos los inventarios de la db
+    console.log(payload);
+    return 'Texto recibido';
+  }
+  async onCreateClientReceived(payload: any) {
+    //creara un nuevo cliente en la db
+    console.log(payload);
+    return 'Texto recibido';
+  }
+  async onGetClientReceived(payload: any) {
+    //obtiene todos los clientes de la db
+    console.log(payload);
+    return 'Texto recibido';
+  }
+  async onCreatehistoryReceived(payload: any) {
+    //creara un nuevo historial en la db
+    console.log(payload);
+    return 'Texto recibido';
+  }
+  async onGethistoryReceived(payload: any) {
+    //obtiene todos los historiales de la db
+    console.log(payload);
     return 'Texto recibido';
   }
  
