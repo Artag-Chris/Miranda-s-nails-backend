@@ -14,14 +14,15 @@ export class PrismaRoutes {
     router.get(`/manicurist`,prismaController.onGetManicurist);
 
     router.post(`/client`,prismaController.onCreateClient);
-    router.get(`/client`,prismaController.onGetClient);
+    router.get(`/clients`,prismaController.onGetClients);
+    router.get(`/client:id`,prismaController.onGetClient);
 
-    router.post(`/createhistory`,prismaController.onCreatehistory);
+    router.post(`/createhistory:id`,prismaController.onCreatehistory);
     router.get(`/gethistory`,prismaController.onGethistory);
 
     router.post(`/inventary`,prismaController.onCreateInventary);
-    router.get(`/inventary`,prismaController.onGetInventary);
-
+    router.get(`/allinventary`,prismaController.onGetAllInventary);
+    router.get(`/inventary:id`,prismaController.onGetInventary);
 
 return router;
  }

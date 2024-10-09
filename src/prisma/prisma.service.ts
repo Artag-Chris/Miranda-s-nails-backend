@@ -32,6 +32,11 @@ class PrismaService extends PrismaClient {
     console.log(payload);
     return 'Texto recibido';
   }
+  async onGetAllInventaryReceived(payload: any) {
+    //obtiene todos los inventarios de la db
+    console.log(payload);
+    return 'Texto recibido';
+  }
   async onGetInventaryReceived(payload: any) {
     //obtiene todos los inventarios de la db
     console.log(payload);
@@ -39,6 +44,11 @@ class PrismaService extends PrismaClient {
   }
   async onCreateClientReceived(payload: any) {
     //creara un nuevo cliente en la db
+    console.log(payload);
+    return 'Texto recibido';
+  }
+  async onGetClientsReceived(payload: any) {
+    //obtiene todos los clientes de la db
     console.log(payload);
     return 'Texto recibido';
   }
