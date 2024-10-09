@@ -31,7 +31,7 @@ export class PrismaController {
         res.status(200).send(mensaje);
     }
     onGetInventary= async(req:Request, res:Response) =>{
-        const payload= req.body;
+        const payload= req.params;
         const mensaje =await this.prismaService.onGetInventaryReceived(payload);   
         res.status(200).send(mensaje);
     }
@@ -46,7 +46,7 @@ export class PrismaController {
         res.status(200).send(mensaje);
     }
     onGetClient= async(req:Request, res:Response) =>{
-        const payload= req.body;
+        const payload= req.params;
         const mensaje =await this.prismaService.onGetClientsReceived(payload);   
         res.status(200).send(mensaje);
     }
