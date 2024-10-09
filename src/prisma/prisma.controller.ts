@@ -60,6 +60,36 @@ export class PrismaController {
         const mensaje =await this.prismaService.onGethistoryReceived(payload);   
         res.status(200).send(mensaje);
     }
+    onCreateNewturn= async(req:Request, res:Response) =>{
+        const payload= req.body;
+        const mensaje =await this.prismaService.onCreateNewturnReceived(payload);   
+        res.status(200).send(mensaje);
+    }
+    onGetTurns= async(req:Request, res:Response) =>{
+        const payload= req.body;
+        const mensaje =await this.prismaService.onGetTurnsReceived(payload);   
+        res.status(200).send(mensaje);
+    }
+    onGetSpecificTurn= async(req:Request, res:Response) =>{
+        const payload= req.params;
+        const mensaje =await this.prismaService.onGetSpecificTurnsReceived(payload);   
+        res.status(200).send(mensaje);
+    }
+    onCreateNewfinanceReport= async(req:Request, res:Response) =>{
+        const payload= req.body;
+        const mensaje =await this.prismaService.onCreateNewfinanceReportReceived(payload);   
+        res.status(200).send(mensaje);
+    }
+    onGetAllFinancesReports= async(req:Request, res:Response) =>{
+        const payload= req.body;
+        const mensaje =await this.prismaService.onGetAllFinancesReportsReceived(payload);   
+        res.status(200).send(mensaje);
+    }
+    onGetFinancesReport= async(req:Request, res:Response) =>{
+        const payload= req.params;
+        const mensaje =await this.prismaService.onGetFinancesReportReceived(payload);   
+        res.status(200).send(mensaje);
+    }
 
 }
 

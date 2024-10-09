@@ -24,6 +24,14 @@ export class PrismaRoutes {
     router.get(`/allinventary`,prismaController.onGetAllInventary);
     router.get(`/inventary:id`,prismaController.onGetInventary);
 
+    router.post(`/newturn`,prismaController.onCreateNewturn);
+    router.get(`/turns`,prismaController.onGetTurns);
+    router.get(`/turns:id`,prismaController.onGetSpecificTurn);
+
+    router.post(`/financereport`,prismaController.onCreateNewfinanceReport);
+    router.get(`/financereport`,prismaController.onGetAllFinancesReports);
+    router.get(`/financereport:id`,prismaController.onGetFinancesReport);
+
 return router;
  }
 }

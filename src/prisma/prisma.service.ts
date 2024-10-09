@@ -67,6 +67,36 @@ class PrismaService extends PrismaClient {
     console.log(payload);
     return 'Texto recibido';
   }
+  async onCreateNewturnReceived(payload: any) {
+    //creara un nuevo turno en la db
+    console.log(payload);
+    return 'Texto recibido';
+  }
+  async onGetTurnsReceived(payload: any) {
+    //obtiene todos los turnos de la db
+    console.log(payload);
+    return 'Texto recibido';
+  }
+  async onGetSpecificTurnsReceived(payload: any) {
+    //obtiene todos los turnos de la db
+    console.log(payload);
+    return 'Texto recibido';
+  }
+  async onCreateNewfinanceReportReceived(payload: any) {
+    //creara un nuevo historial en la db
+    console.log(payload);
+    return 'Texto recibido';
+  }
+  async onGetAllFinancesReportsReceived(payload: any) {
+    //obtiene todos los historiales de la db
+    console.log(payload);
+    return 'Texto recibido';
+  }
+  async onGetFinancesReportReceived(payload: any) {
+    //obtiene todos los historiales de la db
+    console.log(payload);
+    return 'Texto recibido';
+  }
  
   
   async init() {
