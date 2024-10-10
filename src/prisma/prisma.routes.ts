@@ -22,7 +22,8 @@ export class PrismaRoutes {
 
     router.post(`/inventary`,prismaController.onCreateInventary);
     router.get(`/allinventary`,prismaController.onGetAllInventary);
-    router.get(`/inventary:phone`,prismaController.onGetInventary);
+    router.get(`/inventary/:nombre`,prismaController.onGetInventary);
+    //se creara ruta para traer objetos por el valor del precio
 
     router.post(`/newturn`,prismaController.onCreateNewturn);
     router.get(`/turns`,prismaController.onGetTurns);
