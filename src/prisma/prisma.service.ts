@@ -202,15 +202,78 @@ class PrismaService extends PrismaClient {
       return 'Error al obtener cliente';
     }
   }
-  async onCreatehistoryReceived(payload: any) {
-    //creara un nuevo historial en la db
-    console.log(payload);
-    return 'Texto recibido';
+  async onCreatehistoryReceived(cliente_id:number, manicurista_id:number, servicio_id:any,tipo_servicio_id:number, fecha:any, observaciones:any, tiene_hongos:boolean) {
+   
+    try {
+      const historialUnas = await this.historialUnas.create({
+        data: {
+          cliente_id: cliente_id,
+          manicurista_id: manicurista_id,
+          servicio_id: servicio_id,
+          tipo_servicio_id: tipo_servicio_id,
+          fecha: fecha,
+          observaciones: observaciones,
+          tiene_hongos: tiene_hongos,
+        },
+      });
+  
+      return historialUnas;
+    } catch (error) {
+      console.error('Error al crear historial de unas:', error);
+      return 'Error al crear historial de unas';
+    }
   }
-  async onGethistoryReceived(payload: any) {
-    //obtiene todos los historiales de la db
-    console.log(payload);
-    return 'Texto recibido';
+  async onGethistoryReceived() {
+    try {
+      const historialesUnas = await this.historialUnas.findMany({
+        select: {
+          id: true,
+          fecha: true,
+          observaciones: true,
+          cliente: {
+            select: {
+              nombre: true,
+              telefono: true,
+            },
+          },
+          manicurista: {
+            select: {
+              nombre: true,
+              telefono: true,
+            },
+          },
+        },
+      });
+  
+      return historialesUnas;
+    } catch (error) {
+      console.error('Error al obtener historiales de uñas:', error);
+      return 'Error al obtener historiales de uñas';
+    }
+  }
+  async onGetSpecificHistoryReceived(cliente_id: any) {
+    try {
+      const historialUnas = await this.historialUnas.findUnique({
+        where: {
+          cliente_id,
+        },
+        include: {
+          cliente: true,
+          manicurista: true,
+          servicio: true,
+          tipo_servicio: true,
+        },
+      });
+  
+      if (!historialUnas) {
+        return 'Historial de uñas no encontrado';
+      }
+  
+      return historialUnas;
+    } catch (error) {
+      console.error('Error al obtener historial de uñas:', error);
+      return 'Error al obtener historial de uñas';
+    }
   }
   async onCreateNewturnReceived(cliente_id: number, manicurista_id: number, fecha:Date, hora:string) {
   

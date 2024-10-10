@@ -53,12 +53,18 @@ export class PrismaController {
     }
     onCreatehistory= async(req:Request, res:Response) =>{
         const payload= req.body;
-        const mensaje =await this.prismaService.onCreatehistoryReceived(payload);   
+        const { cliente_id, manicurista_id, servicio_id,tipo_servicio_id, fecha, observaciones, tiene_hongos } = payload;
+        const mensaje =await this.prismaService.onCreatehistoryReceived(cliente_id, manicurista_id, servicio_id,tipo_servicio_id, fecha, observaciones, tiene_hongos);   
         res.status(200).send(mensaje);
     }
     onGethistory= async(req:Request, res:Response) =>{
-        const payload= req.body;
-        const mensaje =await this.prismaService.onGethistoryReceived(payload);   
+        const mensaje =await this.prismaService.onGethistoryReceived();   
+        res.status(200).send(mensaje);
+    }
+    onGetSpecificHistory= async(req:Request, res:Response) =>{
+        const cliente_id= req.params.cliente_id;
+        
+        const mensaje =await this.prismaService.onGetSpecificHistoryReceived(cliente_id);   
         res.status(200).send(mensaje);
     }
     onCreateNewturn= async(req:Request, res:Response) =>{

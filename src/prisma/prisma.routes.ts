@@ -19,6 +19,7 @@ export class PrismaRoutes {
 
     router.post(`/createhistory`,prismaController.onCreatehistory);
     router.get(`/gethistory`,prismaController.onGethistory);
+    router.get(`/gethistory/:cliente_id`,prismaController.onGetSpecificHistory);
 
     router.post(`/inventary`,prismaController.onCreateInventary);
     router.get(`/allinventary`,prismaController.onGetAllInventary);
