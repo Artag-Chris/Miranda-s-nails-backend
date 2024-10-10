@@ -127,14 +127,30 @@ class PrismaService extends PrismaClient {
       
   }
   async onGetClientsReceived() {
-    //obtiene todos los clientes de la db
-   
-    return 'Texto recibido';
+    try {
+      const clientes = await this.cliente.findMany();
+      return clientes.map((cliente) => ({ ...cliente, id: cliente.id.toString() }));
+    } catch (error) {
+      console.error('Error al obtener clientes:', error);
+      return 'Error al obtener clientes';
+    }
   }
-  async onGetClientReceived(payload: any) {
-    //obtiene todos los clientes de la db
-    console.log(payload);
-    return 'Texto recibido';
+  async onGetClientReceived(name: string) {
+    try {
+      const cliente = await this.cliente.findFirst({
+        where: {
+          nombre: name,
+        },
+      });
+      if (cliente) {
+        return { ...cliente, id: cliente.id.toString() };
+      } else {
+        return 'Cliente no encontrado';
+      }
+    } catch (error) {
+      console.error('Error al obtener cliente:', error);
+      return 'Error al obtener cliente';
+    }
   }
   async onCreatehistoryReceived(payload: any) {
     //creara un nuevo historial en la db
