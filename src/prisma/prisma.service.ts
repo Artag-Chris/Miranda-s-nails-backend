@@ -15,13 +15,50 @@ class PrismaService extends PrismaClient {
   }
   
    ///se cambiara los metodos 
-  async onCreateManicuristReceived(payload: any) {
-   //creara un nuevo manicurista en la db
-   console.log(payload);
+   async onCreateManicuristReceived(nombre: string, telefono: string, email: string) {
+    console.log(nombre, telefono, email);
+    
+    try {
+      
+      const manicuristaExistente = await this.manicurista.findFirst({
+        where: {
+          nombre,
+          telefono,
+        },
+      });
   
-    return 'Texto recibido';
+      if (manicuristaExistente) {
+        const manicuristaActualizado = await this.manicurista.update({
+          where: {
+            id: manicuristaExistente.id,
+          },
+          data: {
+            telefono,
+            email,
+            nombre
+          },
+        });
+  
+        console.log(manicuristaActualizado);
+        return 'Manicurista actualizado con éxito';
+      } else {
+        const manicuristaNuevo = await this.manicurista.create({
+          data: {
+            nombre,
+            telefono,
+            email,
+          },
+        });
+  
+        console.log(manicuristaNuevo);
+        return 'Manicurista creado con éxito';
+      }
+    } catch (error) {
+      console.error('Error al crear o actualizar manicurista:', error);
+      return 'Error al crear o actualizar manicurista';
+    }
+    
   }
-
   async onGetManicuristReceived(payload: any) {
     //obtiene todos los manicuristas de la db
     console.log(payload);

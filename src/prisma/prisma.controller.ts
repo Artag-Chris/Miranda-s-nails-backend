@@ -9,10 +9,10 @@ export class PrismaController {
     ) {}
     
     onCreateManicurist= async(req:Request, res:Response) =>{
-        //se desfragmentara el body
         const payload= req.body;
-        const mensaje =await this.prismaService.onCreateManicuristReceived(payload);   
-        res.status(200).send(mensaje);
+        const { nombre, telefono, email } = payload;
+        const response =await this.prismaService.onCreateManicuristReceived(nombre, telefono, email);   
+        res.status(200).send(response);
     }
    
     onGetManicurist= async(req:Request, res:Response) =>{
