@@ -63,17 +63,18 @@ export class PrismaController {
     }
     onCreateNewturn= async(req:Request, res:Response) =>{
         const payload= req.body;
-        const mensaje =await this.prismaService.onCreateNewturnReceived(payload);   
+        const { cliente_id, manicurista_id, fecha, hora } = payload;
+        const mensaje =await this.prismaService.onCreateNewturnReceived(cliente_id, manicurista_id, fecha, hora);   
         res.status(200).send(mensaje);
     }
     onGetTurns= async(req:Request, res:Response) =>{
-        const payload= req.body;
-        const mensaje =await this.prismaService.onGetTurnsReceived(payload);   
+        const mensaje =await this.prismaService.onGetTurnsReceived();   
         res.status(200).send(mensaje);
     }
     onGetSpecificTurn= async(req:Request, res:Response) =>{
         const payload= req.params;
-        const mensaje =await this.prismaService.onGetSpecificTurnsReceived(payload);   
+        const { cliente_id } = payload;
+        const mensaje =await this.prismaService.onGetSpecificTurnsReceived(cliente_id);   
         res.status(200).send(mensaje);
     }
     onCreateNewfinanceReport= async(req:Request, res:Response) =>{

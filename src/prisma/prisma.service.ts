@@ -212,20 +212,65 @@ class PrismaService extends PrismaClient {
     console.log(payload);
     return 'Texto recibido';
   }
-  async onCreateNewturnReceived(payload: any) {
-    //creara un nuevo turno en la db
-    console.log(payload);
-    return 'Texto recibido';
+  async onCreateNewturnReceived(cliente_id: number, manicurista_id: number, fecha:Date, hora:string) {
+  
+    try {
+      const turno = await this.turno.create({
+        data: {
+          cliente_id: cliente_id,
+          manicurista_id: manicurista_id,
+          fecha: fecha,
+          hora: hora,
+          estado: "pendiente",
+        },
+      });
+  
+      return turno;
+    } catch (error) {
+      console.error('Error al crear turno:', error);
+      return 'Error al crear turno';
+    }
   }
-  async onGetTurnsReceived(payload: any) {
-    //obtiene todos los turnos de la db
-    console.log(payload);
-    return 'Texto recibido';
+  async onGetTurnsReceived() {
+    try {
+      const turnos = await this.turno.findMany({
+        include: {
+          cliente: true,
+          manicurista: true,
+          ServiciosRealizados: true,
+        },
+      });
+  
+      return turnos;
+    } catch (error) {
+      console.error('Error al obtener turnos:', error);
+      return 'Error al obtener turnos';
+    }
   }
-  async onGetSpecificTurnsReceived(payload: any) {
-    //obtiene todos los turnos de la db
-    console.log(payload);
-    return 'Texto recibido';
+  async onGetSpecificTurnsReceived(cliente_id: any ) {
+    
+    try {
+      const turno = await this.turno.findFirst({
+        where: {
+          cliente_id: cliente_id,
+          estado: 'pendiente',
+        },
+        include: {
+          cliente: true,
+          manicurista: true,
+          ServiciosRealizados: true,
+        },
+      });
+  
+      if (turno) {
+        return turno;
+      } else {
+        return 'Turno no encontrado';
+      }
+    } catch (error) {
+      console.error('Error al obtener turno:', error);
+      return 'Error al obtener turno';
+    }
   }
   async onCreateNewfinanceReportReceived(payload: any) {
     //creara un nuevo historial en la db
