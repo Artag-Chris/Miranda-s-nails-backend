@@ -27,8 +27,8 @@ export class PrismaController {
         res.status(200).send(mensaje);
     }
     onGetAllInventary= async(req:Request, res:Response) =>{
-        const payload= req.body;
-        const mensaje =await this.prismaService.onGetAllInventaryReceived(payload);   
+        
+        const mensaje =await this.prismaService.onGetAllInventaryReceived();   
         res.status(200).send(mensaje);
     }
     onGetInventary= async(req:Request, res:Response) =>{

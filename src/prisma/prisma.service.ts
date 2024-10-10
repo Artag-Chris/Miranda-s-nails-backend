@@ -112,10 +112,14 @@ class PrismaService extends PrismaClient {
       return 'Error al crear o actualizar inventario';
     }
   }
-  async onGetAllInventaryReceived(payload: any) {
-    //obtiene todos los inventarios de la db
-    console.log(payload);
-    return 'Texto recibido';
+  async onGetAllInventaryReceived() {
+    try {
+      const inventarios = await this.inventario.findMany();
+      return inventarios.map((inventario) => ({ ...inventario, id: inventario.id.toString() }));
+    } catch (error) {
+      console.error('Error al obtener inventarios:', error);
+      return 'Error al obtener inventarios';
+    }
   }
   async onGetInventaryReceived(payload: any) {
     //obtiene todos los inventarios de la db
