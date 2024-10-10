@@ -15,7 +15,7 @@ class PrismaService extends PrismaClient {
   }
   
    ///se cambiara los metodos 
-   async onCreateManicuristReceived(nombre: string, telefono: string, email: string) {
+  async onCreateManicuristReceived(nombre: string, telefono: string, email: string) {
     
     try {
       
