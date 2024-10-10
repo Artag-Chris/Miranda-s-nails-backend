@@ -123,8 +123,6 @@ class PrismaService extends PrismaClient {
     return 'Texto recibido';
   }
   async onCreateClientReceived(nombre: string, telefono: string, email: string) {
-    
-    
     try {
       const clienteExistente = await this.cliente.findFirst({
         where: {
