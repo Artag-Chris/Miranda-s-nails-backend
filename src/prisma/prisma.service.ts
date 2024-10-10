@@ -87,10 +87,44 @@ class PrismaService extends PrismaClient {
     console.log(payload);
     return 'Texto recibido';
   }
-  async onCreateClientReceived(payload: any) {
-    //creara un nuevo cliente en la db
-    console.log(payload);
-    return 'Texto recibido';
+  async onCreateClientReceived(nombre: string, telefono: string, email: string) {
+    
+    
+    try {
+      const clienteExistente = await this.cliente.findFirst({
+        where: {
+          nombre,
+          telefono,
+        },
+      });
+  
+      if (clienteExistente) {
+        const clienteActualizado = await this.cliente.update({
+          where: {
+            id: clienteExistente.id,
+          },
+          data: {
+            nombre: nombre,
+            telefono: telefono,
+            email: email,
+          },
+        });
+        return { ...clienteActualizado, id: clienteActualizado.id.toString() };
+      } else {
+        const clienteNuevo = await this.cliente.create({
+          data: {
+            nombre: nombre,
+            telefono: telefono,
+            email: email,
+          },
+        });
+        return { ...clienteNuevo, id: clienteNuevo.id.toString() };
+      }
+    } catch (error) {
+      console.error('Error al crear o actualizar cliente:', error);
+      return 'Error al crear o actualizar cliente';
+    }
+      
   }
   async onGetClientsReceived(payload: any) {
     //obtiene todos los clientes de la db

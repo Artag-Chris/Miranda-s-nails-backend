@@ -37,7 +37,8 @@ export class PrismaController {
     }
     onCreateClient= async(req:Request, res:Response) =>{
         const payload= req.body;
-        const mensaje =await this.prismaService.onCreateClientReceived(payload);   
+        const{nombre, telefono, email} = payload
+        const mensaje =await this.prismaService.onCreateClientReceived(nombre, telefono, email);   
         res.status(200).send(mensaje);
     }
     onGetClients= async(req:Request, res:Response) =>{
