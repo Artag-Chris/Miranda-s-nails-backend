@@ -72,12 +72,8 @@ class PrismaService extends PrismaClient {
       return 'Error al obtener manicuristas';
     }
   }
-  async onCreateInventaryReceived(nombre_producto: string, cantidad: number, costo_unitario: number, precio_venta: number) {
-    console.log( nombre_producto, cantidad, costo_unitario, precio_venta);
-    
+  async onCreateInventaryReceived(nombre_producto: string, cantidad: number, costo_unitario: number, precio_venta: number) { 
     try {
-      
-  
       const inventarioExistente = await this.inventario.findFirst({
         where: {
           nombre_producto,
