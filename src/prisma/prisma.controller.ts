@@ -22,7 +22,8 @@ export class PrismaController {
     }
     onCreateInventary= async(req:Request, res:Response) =>{
         const payload= req.body;
-        const mensaje =await this.prismaService.onCreateInventaryReceived(payload);   
+        const { nombre_producto, cantidad, costo_unitario, precio_venta } = payload;
+        const mensaje =await this.prismaService.onCreateInventaryReceived(nombre_producto, cantidad, costo_unitario, precio_venta);   
         res.status(200).send(mensaje);
     }
     onGetAllInventary= async(req:Request, res:Response) =>{

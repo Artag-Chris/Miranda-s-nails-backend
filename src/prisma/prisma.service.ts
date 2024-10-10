@@ -72,10 +72,49 @@ class PrismaService extends PrismaClient {
       return 'Error al obtener manicuristas';
     }
   }
-  async onCreateInventaryReceived(payload: any) {
-    //creara un nuevo inventario en la db
-    console.log(payload);
-    return 'Texto recibido';
+  async onCreateInventaryReceived(nombre_producto: string, cantidad: number, costo_unitario: number, precio_venta: number) {
+    console.log( nombre_producto, cantidad, costo_unitario, precio_venta);
+    
+    try {
+      
+  
+      const inventarioExistente = await this.inventario.findFirst({
+        where: {
+          nombre_producto,
+        },
+      });
+  
+      if (inventarioExistente) {
+        const inventarioActualizado = await this.inventario.update({
+          where: {
+            id: inventarioExistente.id,
+          },
+          data: {
+            cantidad,
+            costo_unitario,
+            precio_venta,
+          },
+        });
+  
+        console.log(inventarioActualizado);
+        return 'Inventario actualizado con éxito';
+      } else {
+        const inventarioNuevo = await this.inventario.create({
+          data: {
+            nombre_producto,
+            cantidad,
+            costo_unitario,
+            precio_venta,
+          },
+        });
+  
+        console.log(inventarioNuevo);
+        return 'Inventario creado con éxito';
+      }
+    } catch (error) {
+      console.error('Error al crear o actualizar inventario:', error);
+      return 'Error al crear o actualizar inventario';
+    }
   }
   async onGetAllInventaryReceived(payload: any) {
     //obtiene todos los inventarios de la db
