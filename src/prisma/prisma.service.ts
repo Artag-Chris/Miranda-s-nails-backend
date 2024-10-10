@@ -16,7 +16,6 @@ class PrismaService extends PrismaClient {
   
    ///se cambiara los metodos 
    async onCreateManicuristReceived(nombre: string, telefono: string, email: string) {
-    console.log(nombre, telefono, email);
     
     try {
       
@@ -59,8 +58,7 @@ class PrismaService extends PrismaClient {
     }
     
   }
-  async onGetManicuristReceived(payload: any) {
-    console.log("en getAllManicuristas");
+  async onGetManicuristReceived() {
     try {
       const manicuristas = await this.manicurista.findMany();
       return manicuristas.map((manicurista) => {

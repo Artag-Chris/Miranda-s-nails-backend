@@ -16,8 +16,8 @@ export class PrismaController {
     }
    
     onGetManicurist= async(req:Request, res:Response) =>{
-        const payload= req.body;
-        const mensaje =await this.prismaService.onGetManicuristReceived(payload);   
+       
+        const mensaje =await this.prismaService.onGetManicuristReceived();   
         res.status(200).send(mensaje);
     }
     onCreateInventary= async(req:Request, res:Response) =>{
