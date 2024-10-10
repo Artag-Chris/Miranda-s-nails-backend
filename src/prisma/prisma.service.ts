@@ -126,9 +126,9 @@ class PrismaService extends PrismaClient {
     }
       
   }
-  async onGetClientsReceived(payload: any) {
+  async onGetClientsReceived() {
     //obtiene todos los clientes de la db
-    console.log(payload);
+   
     return 'Texto recibido';
   }
   async onGetClientReceived(payload: any) {

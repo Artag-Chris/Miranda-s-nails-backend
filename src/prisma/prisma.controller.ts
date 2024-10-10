@@ -42,13 +42,13 @@ export class PrismaController {
         res.status(200).send(mensaje);
     }
     onGetClients= async(req:Request, res:Response) =>{
-        const payload= req.body;
-        const mensaje =await this.prismaService.onGetClientsReceived(payload);   
+       
+        const mensaje =await this.prismaService.onGetClientsReceived();   
         res.status(200).send(mensaje);
     }
     onGetClient= async(req:Request, res:Response) =>{
         const payload= req.params;
-        const mensaje =await this.prismaService.onGetClientsReceived(payload);   
+        const mensaje =await this.prismaService.onGetClientReceived(payload);   
         res.status(200).send(mensaje);
     }
     onCreatehistory= async(req:Request, res:Response) =>{
