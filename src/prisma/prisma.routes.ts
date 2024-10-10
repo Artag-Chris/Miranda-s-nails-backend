@@ -11,7 +11,7 @@ export class PrismaRoutes {
 
     //aqui se crearan las rutas para la base de datos
     router.post(`/manicurist`,prismaController.onCreateManicurist);
-    router.get(`/manicurist`,prismaController.onGetManicurist);
+    router.get(`/getallmanicurist`,prismaController.onGetManicurist);
 
     router.post(`/client`,prismaController.onCreateClient);
     router.get(`/clients`,prismaController.onGetClients);

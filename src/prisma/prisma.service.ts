@@ -60,9 +60,19 @@ class PrismaService extends PrismaClient {
     
   }
   async onGetManicuristReceived(payload: any) {
-    //obtiene todos los manicuristas de la db
-    console.log(payload);
-    return 'Texto recibido';
+    console.log("en getAllManicuristas");
+    try {
+      const manicuristas = await this.manicurista.findMany();
+      return manicuristas.map((manicurista) => {
+        return {
+          ...manicurista,
+          id: manicurista.id.toString(),
+        };
+      });
+    } catch (error) {
+      console.error('Error al obtener manicuristas:', error);
+      return 'Error al obtener manicuristas';
+    }
   }
   async onCreateInventaryReceived(payload: any) {
     //creara un nuevo inventario en la db
