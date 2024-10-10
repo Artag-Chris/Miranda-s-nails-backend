@@ -27,11 +27,11 @@ export class PrismaRoutes {
 
     router.post(`/newturn`,prismaController.onCreateNewturn);
     router.get(`/turns`,prismaController.onGetTurns);
-    router.get(`/turns:id`,prismaController.onGetSpecificTurn);
+    router.get(`/turns/:cliente_id`,prismaController.onGetSpecificTurn);
 
     router.post(`/financereport`,prismaController.onCreateNewfinanceReport);
     router.get(`/financereport`,prismaController.onGetAllFinancesReports);
-    router.get(`/financereport:id`,prismaController.onGetFinancesReport);
+    router.get(`/financereport/:id`,prismaController.onGetFinancesReport);
 
 return router;
  }

@@ -272,20 +272,50 @@ class PrismaService extends PrismaClient {
       return 'Error al obtener turno';
     }
   }
-  async onCreateNewfinanceReportReceived(payload: any) {
-    //creara un nuevo historial en la db
-    console.log(payload);
-    return 'Texto recibido';
+  async onCreateNewfinanceReportReceived(nombre_reporte: string, contenido:any ) {
+    
+    try {
+      const reporteFinanciero = await this.reporteFinanciero.create({
+        data: {
+          nombre_reporte: nombre_reporte,
+          contenido: contenido,
+        },
+      });
+  
+      return reporteFinanciero;
+    } catch (error) {
+      console.error('Error al crear reporte financiero:', error);
+      return 'Error al crear reporte financiero';
+    }
   }
-  async onGetAllFinancesReportsReceived(payload: any) {
-    //obtiene todos los historiales de la db
-    console.log(payload);
-    return 'Texto recibido';
+  async onGetAllFinancesReportsReceived() {
+    try {
+      const reportesFinancieros = await this.reporteFinanciero.findMany();
+  
+      return reportesFinancieros;
+    } catch (error) {
+      console.error('Error al obtener reportes financieros:', error);
+      return 'Error al obtener reportes financieros';
+    }
   }
-  async onGetFinancesReportReceived(payload: any) {
-    //obtiene todos los historiales de la db
-    console.log(payload);
-    return 'Texto recibido';
+  async onGetFinancesReportReceived(id: any) {
+    
+    try {
+      const reporteFinanciero = await this.reporteFinanciero.findUnique({
+        where: {
+         id
+        },
+      });
+  
+      if (reporteFinanciero) {
+        return reporteFinanciero;
+      } else {
+        return 'Reporte financiero no encontrado';
+      }
+    } catch (error) {
+      console.error('Error al obtener reporte financiero:', error);
+      return 'Error al obtener reporte financiero';
+    }
   }
  
   

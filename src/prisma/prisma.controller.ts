@@ -79,17 +79,19 @@ export class PrismaController {
     }
     onCreateNewfinanceReport= async(req:Request, res:Response) =>{
         const payload= req.body;
-        const mensaje =await this.prismaService.onCreateNewfinanceReportReceived(payload);   
+        const { nombre_reporte, contenido } = payload;
+        const mensaje =await this.prismaService.onCreateNewfinanceReportReceived(nombre_reporte, contenido);   
         res.status(200).send(mensaje);
     }
     onGetAllFinancesReports= async(req:Request, res:Response) =>{
-        const payload= req.body;
-        const mensaje =await this.prismaService.onGetAllFinancesReportsReceived(payload);   
+        
+        const mensaje =await this.prismaService.onGetAllFinancesReportsReceived();   
         res.status(200).send(mensaje);
     }
     onGetFinancesReport= async(req:Request, res:Response) =>{
-        const payload= req.params;
-        const mensaje =await this.prismaService.onGetFinancesReportReceived(payload);   
+        const id= req.params.id;
+        
+        const mensaje =await this.prismaService.onGetFinancesReportReceived(id);   
         res.status(200).send(mensaje);
     }
 
